@@ -30,6 +30,8 @@ Through the keywords or query statements entered by the user, the application ca
 - mysql 8.0.4
 - nltk
 
+## Get Started
+
 ### Installation
 1. If you first time to use **Django**:
 ```bash
