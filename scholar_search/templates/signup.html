@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up</title>
+</head>
+<body>
+    <form method="post" action="/users/signup/">
+      {% csrf_token %}
+
+        <input type="text" name="user2" placeholder="Username">
+        <input type="password" name="pwd2" placeholder="Password">
+        <label for="dropdown">Choose your major:</label>
+        <select id="dropdown" name="major">
+            <option value="cs">Computer Science</option>
+            <option value="ds">Data Science</option>
+            <option value="ece">Electrical and Computer Engineering</option>
+            <option value="ms">Mathematical Sciences</option>
+        </select>
+        <input type="submit" value="Sign up"/>
+      <span style="color: red;">{{ error_msg }}</span>
+  </form>
+</body>
+</html>

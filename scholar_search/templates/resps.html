@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scholarly Search</title>
+</head>
+<body>
+<h1>scholarly search</h1>
+<div class="links">
+    {% if request.session.username %}
+        <a href="{% url 'profile' %}">Profile</a>
+        <a href="{% url 'logout' %}">Log Out</a>
+    {% else %}
+        <a href="{% url 'signup' %}">Sign Up</a>
+        <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+</div>
+<form method="post" action="/resps/">
+    {% csrf_token %}
+    <label for="query">Query:</label>
+    <input type="text" id="query" name="query2" placeholder="Query Sentence">
+    <label for="year">Published Date Filter:</label>
+    <select id="year" name="pub_year">
+            <option value="All">All</option>
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+            <option value="2020">2020</option>
+            <option value="2019">2019</option>
+            <option value="2018">2018</option>
+            <option value="2017">2017</option>
+            <option value="2016">2016</option>
+            <option value="2015">2015</option>
+            <option value="2014">2014</option>
+            <option value="2013">2013</option>
+    </select>
+    <input type="submit" value="Search"/>
+</form>
+<h1>Searching Results:</h1>
+<ul>
+    {% for paper in papers %}
+        <li>
+            <a href="{{ paper.url }}" target="_blank">{{ paper.title }}</a>
+            <p>{{ paper.summary }}</p>
+            <p>{{ paper.published }}</p>
+        </li>
+    {% empty %}
+        <li>No results found.</li>
+    {% endfor %}
+</ul>
+<!-- Pagination Links -->
+<div class="pagination">
+    <span class="step-links">
+        {% if papers.has_previous %}
+            <a href="?page=1">First</a>
+            <a href="?page={{ papers.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ papers.number }} of {{ papers.paginator.num_pages }}
+        </span>
+
+        {% if papers.has_next %}
+            <a href="?page={{ papers.next_page_number }}">Next</a>
+            <a href="?page={{ papers.paginator.num_pages }}">Last</a>
+        {% endif %}
+    </span>
+</div>
+</body>
+</html>

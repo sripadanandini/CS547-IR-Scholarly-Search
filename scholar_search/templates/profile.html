@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+    <h1>User Profile</h1>
+    <div class="profile-card">
+        <p><strong>Username:</strong> {{ username }}</p>
+        <p><strong>Major:</strong> {{ major }}</p>
+        <a href="{% url 'search' %}">Back</a>
+    </div>
+</body>
+</html>
